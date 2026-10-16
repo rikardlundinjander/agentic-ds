@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tokens-and-storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Validate token architecture
+        run: npm run tokens:validate
+      - name: Build tokens
+        run: npm run tokens:build
+      - name: Typecheck
+        run: npx tsc -p .
+      - name: Build Storybook
+        run: npx storybook build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tokens
+          path: dist/

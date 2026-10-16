@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# agentic-ds
+
+Proof of concept for a layered token system with two independent theming axes.
+
+## Layers
+
+| Layer | Folder | Example | May reference |
+| --- | --- | --- | --- |
+| Primitives | `tokens/primitives` | `color.blue.600`, `space.4` | nothing (raw values) |
+| Brand | `tokens/brand` | `palette.accent.600`, `brand.radius.control` | primitives |
+| Mode | `tokens/mode` | `color.bg.action` | brand (`palette.*`) |
+| Semantic | `tokens/semantic` | `space.inset.md`, `text.size.body` | primitives, brand |
+
+Components only use **mode** and **semantic** tokens. `npm run tokens:validate` enforces this.
+
+## Axes
+
+Brand and mode switch independently. Use the **Brand** and **Mode** menus in the toolbar above.
+In an app, set both attributes on `<html>`:
+
+```html
+<html data-brand="brand-y" data-mode="dark">
+```
+
+Adding a brand or a mode means adding one JSON file to `tokens/brand` or `tokens/mode`.
+Validation checks that it defines the same tokens as the others in that axis.

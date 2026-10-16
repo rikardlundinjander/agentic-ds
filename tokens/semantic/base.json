@@ -1,0 +1,48 @@
+{
+  "space": {
+    "$type": "dimension",
+    "inset": {
+      "sm": { "$value": "{space.2}" },
+      "md": { "$value": "{space.4}" },
+      "lg": { "$value": "{space.6}" }
+    },
+    "stack": {
+      "sm": { "$value": "{space.2}" },
+      "md": { "$value": "{space.4}" },
+      "lg": { "$value": "{space.8}" }
+    }
+  },
+  "shape": {
+    "$type": "dimension",
+    "radius": {
+      "control": { "$value": "{brand.radius.control}" },
+      "surface": { "$value": "{radius.lg}" }
+    }
+  },
+  "text": {
+    "family": {
+      "$type": "fontFamily",
+      "body": { "$value": "{brand.font.family}" },
+      "code": { "$value": "{font.family.mono}" }
+    },
+    "size": {
+      "$type": "dimension",
+      "caption": { "$value": "{font.size.100}" },
+      "label": { "$value": "{font.size.200}" },
+      "body": { "$value": "{font.size.300}" },
+      "heading": { "$value": "{font.size.500}" },
+      "display": { "$value": "{font.size.600}" }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "body": { "$value": "{font.weight.regular}" },
+      "strong": { "$value": "{font.weight.medium}" },
+      "heading": { "$value": "{font.weight.bold}" }
+    },
+    "line-height": {
+      "$type": "number",
+      "body": { "$value": "{font.line-height.normal}" },
+      "heading": { "$value": "{font.line-height.tight}" }
+    }
+  }
+}

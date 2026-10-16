@@ -1,0 +1,22 @@
+{
+  "color": {
+    "$type": "color",
+    "bg": {
+      "canvas": { "$value": "{palette.neutral.950}" },
+      "surface": { "$value": "{palette.neutral.900}" },
+      "action": { "$value": "{palette.accent.400}" },
+      "action-hover": { "$value": "{palette.accent.300}" },
+      "action-subtle": { "$value": "{palette.accent.900}" }
+    },
+    "text": {
+      "default": { "$value": "{palette.neutral.50}" },
+      "muted": { "$value": "{palette.neutral.400}" },
+      "accent": { "$value": "{palette.accent.300}" },
+      "on-action": { "$value": "{palette.neutral.950}" }
+    },
+    "border": {
+      "default": { "$value": "{palette.neutral.700}" },
+      "focus": { "$value": "{palette.accent.400}" }
+    }
+  }
+}

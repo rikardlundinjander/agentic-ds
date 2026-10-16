@@ -1,0 +1,12 @@
+body {
+  background: var(--color-bg-canvas);
+  color: var(--color-text-default);
+  font-family: var(--text-family-body);
+  font-size: var(--text-size-body);
+  line-height: var(--text-line-height-body);
+}
+
+.sbdocs.sbdocs-wrapper,
+.docs-story {
+  background: var(--color-bg-canvas);
+}

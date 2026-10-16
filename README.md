@@ -3,7 +3,7 @@
 Proof of concept for a design system with layered tokens and two independent theming axes (brand and mode).
 
 - **Tokens** in JSON, [DTCG format](https://www.designtokens.org/)
-- **Style Dictionary** as the translation layer (CSS today, iOS and Android later)
+- **Style Dictionary** as the translation layer (CSS, SCSS, JS/TS, JSON, Swift, Android XML, Compose)
 - **Storybook** for components and token docs, with a brand switch and a mode switch in the toolbar
 
 ## Getting started
@@ -18,8 +18,33 @@ Other scripts:
 | Script | What it does |
 | --- | --- |
 | `npm run tokens:validate` | Checks the layer rules (see below) |
-| `npm run tokens:build` | Builds `dist/css/tokens.css` and `dist/json/tokens.json` |
+| `npm run tokens:build` | Builds every platform output into `dist/` (see below) |
 | `npm run build-storybook` | Static Storybook in `storybook-static/` |
+
+## Using it in your projects
+
+The package ships tokens only, so it works with any framework or language. Components in `src/` are Storybook documentation, not part of the package.
+
+```bash
+npm install @rikardlundinjander/agentic-ds
+```
+
+| Platform | Import / copy | Switching brand and mode |
+| --- | --- | --- |
+| Web (any framework) | `@rikardlundinjander/agentic-ds/css` | At runtime, `data-brand` and `data-mode` on `<html>` |
+| SCSS | `@rikardlundinjander/agentic-ds/scss/brand-x-light` | One file per combination |
+| JS / TS | `import * as t from '@rikardlundinjander/agentic-ds/js/brand-x-light'` | One module per combination, with types |
+| JSON | `@rikardlundinjander/agentic-ds/json/brand-x-light` (no file extension) | One file per combination |
+| iOS | `dist/ios/BrandXLight.swift` | One Swift class per combination |
+| Android (XML) | `dist/android/brand-x-light/{colors,dimens}.xml` | Pick the folder at build time |
+| Android (Compose) | `dist/compose/BrandXLight.kt` | One Kotlin object per combination |
+
+Only mode and semantic tokens are emitted for non-CSS platforms. Primitives and brand palettes are inputs, not API. Native outputs use the first font in a stack, so the font has to be bundled with the app, and text sizes become `sp` on Android.
+
+### Automatic updates
+
+1. Release: `npm version minor && git push --follow-tags`. The `Publish` workflow builds all outputs and publishes to npm (needs an `NPM_TOKEN` repository secret).
+2. In each consuming project, enable Renovate or Dependabot. Copy [renovate.example.json](renovate.example.json) to `renovate.json` as a starting point. A new token version then arrives as a pull request, the project's CI builds against it, and it can auto-merge.
 
 ## Token layers
 
@@ -73,7 +98,6 @@ These run in CI on every push and pull request (`.github/workflows/ci.yml`).
 
 ## Not in the PoC yet
 
-- iOS (Swift) and Android (Compose) outputs. On native there is no CSS cascade, so the build would output one file per brand × mode combination.
 - Figma sync (JSON stays the source of truth; Tokens Studio or the Figma Variables API can read from it).
 - Component tokens (`button.bg.primary`), only if a real need shows up.
 - Visual regression testing (Chromatic or Playwright).
